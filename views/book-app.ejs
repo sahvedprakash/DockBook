@@ -1,0 +1,181 @@
+<nav class="container nav-container">
+  <section class="search" id="search">
+    <div class="profile-img">
+      <img src="" alt="" />
+    </div>
+    <input
+      type="text"
+      id="search-input"
+      class="serach-input"
+      placeholder="Search"
+    />
+    <i class="fas fa-search search-icon icon"></i>
+  </section>
+  <section class="nav-item">
+    <i id="notifi-popup" class="far fa-bell not-icon icon"></i>
+    <div id="log-out-pop" class="profile-img">
+      <img src="" alt="" />
+    </div>
+  </section>
+  <div class="log-in-popup">
+    <a href="#">Profile</a>
+    <a href="#">Log out</a>
+  </div>
+
+  <div class="noti-popup"></div>
+</nav>
+
+<section class="container doc-info-con">
+  <div class="doc-info">
+    <div class="doc-photo">
+      <img src="/img/<%=doc.profileImg%>" alt="" />
+    </div>
+    <div class="doc-inf-add">
+      <h2><%=doc.name%></h2>
+      <p><%=doc.tobTitle%></p>
+    </div>
+    <div class="doc-inf-add">
+      <h3><%=cham.chamberName%></h3>
+      <p><%=cham.address%></p>
+      <p><%=cham.contactNumber%></p>
+    </div>
+    <% const checkTime = (arr) => { let visitTime; if (arr[2] === null) {
+    visitTime = `${arr[0]}-${arr[1]}`; return visitTime; } else { visitTime =
+    "off-day"; return visitTime; } }; %>
+    <div>
+      <h3 class="book-visit">Visiting Hour</h3>
+      <div class="book-timimg">
+        <p>Mon : <%= checkTime(cham.mon)%></p>
+        <p>Tue : <%= checkTime(cham.tue)%></p>
+        <p>Wed : <%= checkTime(cham.wed)%></p>
+        <p>Thu : <%= checkTime(cham.thu)%></p>
+        <p>Fri : <%= checkTime(cham.fri)%></p>
+        <p>Sat : <%= checkTime(cham.sat)%></p>
+        <p>Sun : <%= checkTime(cham.sun)%></p>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="container">
+  <form
+    action="/<%= doc.slug%>/<%= cham.id%>/book-appointment"
+    class="doc-profile-form"
+    method="POST"
+  >
+    <div class="sec-div-book information">
+      <h2 class="p-title">Book An Appoinment</h2>
+      <div class="form-grp">
+        <label for="patient-name">Patient Name</label>
+        <input
+          type="text"
+          name="patientName"
+          id="patient-name"
+          placeholder="Enter name"
+          required
+        />
+      </div>
+      <div class="form-grp">
+        <label for="patient-Phonr">Contact No:</label>
+        <input
+          type="text"
+          onkeypress="validate(event)"
+          name="patientPhone"
+          id="patient-phone"
+          placeholder="Enter contact number"
+          required
+        />
+      </div>
+      <div class="form-grp">
+        <label for="patient-Phone">Date of Appoinment</label>
+        <input type="date" id="app-date" name="appDate" required />
+      </div>
+      <div class="form-grp">
+        <label for="patient-address">Enter Address</label>
+        <textarea
+          name="patientAddress"
+          id="patient-address"
+          cols="30"
+          rows="10"
+        ></textarea>
+      </div>
+      <div class="form-grp">
+        <label for="health-address">Health Issues</label>
+        <textarea
+          name="healthIssue"
+          id="health-address"
+          cols="30"
+          rows="10"
+          required
+        ></textarea>
+      </div>
+      <button class="btn next-btn" onclick="dateCheck()" type="submit">
+        Submit
+      </button>
+      <a onclick="showMy()" class="my-self-book">Book for yourself</a>
+    </div>
+  </form>
+  <h1><%= mess%></h1>
+  <% if(errorMsg.length>0){%>
+  <div class="err-msg" id="err-msg"><%= errorMsg%></div>
+  <%}%>
+</section>
+<script>
+  const logOutPop = document.getElementById("log-out-pop");
+  const nofipop = document.getElementById("notifi-popup");
+  const logProfile = document.querySelector(".log-in-popup");
+  const notification = document.querySelector(".noti-popup");
+  const toggleClass = "toggle-class";
+  const msg = document.getElementById("msg");
+  const errMSG = document.getElementById("err-msg");
+
+  logOutPop.addEventListener("click", function () {
+    logProfile.classList.toggle(toggleClass);
+    notification.classList.remove(toggleClass);
+  });
+
+  nofipop.addEventListener("click", function () {
+    notification.classList.toggle(toggleClass);
+    logProfile.classList.remove(toggleClass);
+  });
+
+  function validate(evt) {
+    var theEvent = evt || window.event;
+
+    // Handle paste
+    if (theEvent.type === "paste") {
+      key = event.clipboardData.getData("text/plain");
+    } else {
+      // Handle key press
+      var key = theEvent.keyCode || theEvent.which;
+      key = String.fromCharCode(key);
+    }
+    var regex = /[0-9]|\./;
+    if (!regex.test(key)) {
+      theEvent.returnValue = false;
+      if (theEvent.preventDefault) theEvent.preventDefault();
+    }
+  }
+
+  function showMy() {
+    document.getElementById("patient-name").value =
+      "<%= userData.patientInfo.name%>";
+    document.getElementById("patient-phone").value =
+      "<%= userData.patientInfo.phoneNum%>";
+    document.getElementById("patient-address").value =
+      "<%= userData.patientInfo.address%>";
+  }
+
+  let bookDate = document.getElementById("app-date");
+
+  let selectDate = bookDate.value;
+  let today = new Date().toLocaleDateString("en-CA");
+  function dateCheck(event) {
+    if (today > bookDate.value) {
+      console.log("Error Date");
+    }
+  }
+
+  setTimeout(function () {
+    $(".err-msg").remove();
+  }, 5000);
+</script>

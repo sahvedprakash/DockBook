@@ -1,0 +1,109 @@
+<%- include ('nav.ejs') %>
+<main class="container">
+  <section class="intro-section-dp dp-container">
+    <div class="profile-img-dp">
+      <img src="../img/<%= doc.profileImg%>" alt="" />
+    </div>
+    <div class="profile-info-dp">
+      <h3><%= doc.name%></h3>
+      <h4><%= doc.tobTitle%></h4>
+      <div class="profession-info-dp">
+        <p><%= doc.currentPosition%></p>
+        <p><%= doc.workdPlace%></p>
+        <div class="email-dp">
+          <i class="far fa-envelope-open"></i>
+          <p><%= doc.userDel?.email%></p>
+        </div>
+        <div class="mobile-dp">
+          <i class="fas fa-mobile-alt"></i>
+          <p class="numbers"><%= doc.phoneNum%></p>
+        </div>
+        <div class="gender-xp-dp">
+          <p><%= doc.gander%></p>
+          <p>
+            <span class="numbers"><%= doc.exprience%></span>years Experience
+          </p>
+        </div>
+        <div class="speciality-dp">
+          <h4>Speciality</h4>
+          <div class="speciality-info-dp">
+            <% doc.specialties.forEach((spl,i)=> {%>
+            <p><%= spl%></p>
+            <% }) %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="doc-rating-dp">
+      <div class="rating-icon">
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+      </div>
+      <div class="vote-amount-dp">
+        <p><span class="numbers">150</span> votes</p>
+      </div>
+      <p class="check-verified">Medical Registration Varfied</p>
+    </div>
+  </section>
+  <section class="about-doc-sec-dp dp-container">
+    <h3>About Doctor</h3>
+    <p><%= doc.extraQuility%></p>
+  </section>
+  <% const checkTime = (arr) => { let visitTime; if (arr[2] === null) {
+  visitTime = `${arr[0]}-${arr[1]}`; return visitTime; } else { visitTime =
+  "off-day"; return visitTime; } }; %>
+  <section class="chamber-list">
+    <%chamList.forEach(cham=>{%>
+    <div class="chamber dp-container">
+      <img
+        class="chamber-img"
+        src="https://www.mdoctorshub.com/wp-content/uploads/2016/09/Chamber-3-1.jpg"
+        alt=""
+      />
+      <div class="chamber-del">
+        <div class="chamber-add">
+          <h3><%= cham.chamberName%></h3>
+          <p><%= cham.address%>a</p>
+          <p class="numbers"><%= cham.contactNumber%></p>
+        </div>
+        <p class="visit-title">Visiting Day and Hour</p>
+        <div class="timing">
+          <p class="numbers">Mon: <%= checkTime(cham.mon)%></p>
+          <p class="numbers">Tue: <%= checkTime(cham.tue)%></p>
+          <p class="numbers">Wed: <%= checkTime(cham.wed)%></p>
+          <p class="numbers">Thu: <%= checkTime(cham.thu)%></p>
+          <p class="numbers">Fri: <%= checkTime(cham.fri)%></p>
+          <p class="numbers">Sat: <%= checkTime(cham.sat)%></p>
+          <p class="numbers">Sun: <%= checkTime(cham.sun)%></p>
+        </div>
+      </div>
+
+      <div class="btn book-btn">
+        <a href="/<%=doc.slug%>/<%= cham.id%>/book-appointment"
+          >Book Appointment</a
+        >
+      </div>
+    </div>
+    <%})%>
+  </section>
+</main>
+<script>
+  const logOutPop = document.getElementById("log-out-pop");
+  const nofipop = document.getElementById("notifi-popup");
+  const logProfile = document.querySelector(".log-in-popup");
+  const notification = document.querySelector(".noti-popup");
+  const toggleClass = "toggle-class";
+
+  logOutPop.addEventListener("click", function () {
+    logProfile.classList.toggle(toggleClass);
+    notification.classList.remove(toggleClass);
+  });
+
+  nofipop.addEventListener("click", function () {
+    notification.classList.toggle(toggleClass);
+    logProfile.classList.remove(toggleClass);
+  });
+</script>

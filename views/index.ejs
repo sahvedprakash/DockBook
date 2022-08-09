@@ -1,0 +1,149 @@
+<%- include ('nav.ejs') %>
+<main class="container main-container">
+  <div class="left-section">
+    <h2 class="left-heading-title">Filter By</h2>
+    <div class="left-card left-card-1">
+      <h4>Category</h4>
+      <div class="check-box box-1">
+        <div class="option">
+          <input type="checkbox" name="" id="1" />
+          <label for="1">Spacilality 1</label>
+        </div>
+        <div class="option">
+          <input type="checkbox" name="" id="2" />
+          <label for="2">Spacilality 2</label>
+        </div>
+        <div class="option">
+          <input type="checkbox" name="" id="3" />
+          <label for="3">Spacilality 3</label>
+        </div>
+      </div>
+    </div>
+    <div class="left-card left-card-1">
+      <h4>Localtion</h4>
+      <div class="check-box box-1">
+        <div class="option">
+          <input type="checkbox" name="" id="1" />
+          <label for="1">Location 1</label>
+        </div>
+        <div class="option">
+          <input type="checkbox" name="" id="2" />
+          <label for="2">Locatin 2</label>
+        </div>
+        <div class="option">
+          <input type="checkbox" name="" id="3" />
+          <label for="3">Location 3</label>
+        </div>
+      </div>
+    </div>
+    <div class="left-card left-card-1">
+      <h4>Experience Level</h4>
+      <div class="check-box box-1">
+        <div class="option">
+          <input type="checkbox" name="" id="1" />
+          <label for="1">0yr - 5yr</label>
+        </div>
+        <div class="option">
+          <input type="checkbox" name="" id="2" />
+          <label for="2">5y - 10yr</label>
+        </div>
+        <div class="option">
+          <input type="checkbox" name="" id="3" />
+          <label for="3">More Than 10</label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="middle-section">
+    <%doctorList.forEach(doctor=>{%>
+    <div class="user-card">
+      <div class="user-img">
+        <img src="./img/<%=doctor.profileImg%>" alt="" />
+      </div>
+      <div class="user-info">
+        <h3><%= doctor.name%></h3>
+        <h4><%=doctor.tobTitle%></h4>
+        <div class="degree-info">
+          <p><%= doctor.currentPosition%>, <%= doctor.workdPlace%></p>
+          <div class="contact-info">
+            <i class="far fa-envelope-open"></i>
+            <p><%= doctor.userDel?.email%></p>
+          </div>
+          <div class="contact-info">
+            <i class="fas fa-mobile-alt"></i>
+            <p class="numbers"><%= doctor.phoneNum%></p>
+          </div>
+          <div class="speciality">
+            <h4>Speciality</h4>
+            <div>
+              <% doctor.specialties.forEach((spl,i)=> {%>
+              <p><%= spl%></p>
+              <% }) %>
+            </div>
+          </div>
+        </div>
+        <div class="visit-profile-btn">
+          <div class="like-icon">
+            <i class="far fa-heart"></i>
+            <p>15</p>
+          </div>
+          <div class="profile-link-btn">
+            <a href="/doctor/<%=doctor.slug%>">Visit Profile</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <%})%>
+  </div>
+  <div class="right-section">
+    <h1 class="right-heading-title">Latest Covid Update</h1>
+    <div class="card card-1">
+      <h2>New Cases</h2>
+      <h1><%=data.dailyconfirmed%></h1>
+    </div>
+    <div class="card card-2">
+      <h2>New Death</h2>
+      <h1><%=data.dailydeceased%></h1>
+    </div>
+    <div class="card card-3">
+      <h2>Total Death</h2>
+      <h1><%=data.totaldeceased%></h1>
+    </div>
+    <div class="card card-4">
+      <h2>Total Recover</h2>
+      <h1><%=data.totalrecovered%></h1>
+    </div>
+    <div class="card card-5">
+      <h2>Daily Recover</h2>
+      <h1><%= data.dailyrecovered%></h1>
+    </div>
+    <div class="card card-5">
+      <h3>Last Update</h3>
+      <h1><%= data.date%></h1>
+    </div>
+  </div>
+  <% if(message.length>0){%>
+  <div class="err-msg" id="err-msg"><%= message%></div>
+  <%}%>
+</main>
+
+<script>
+  const logOutPop = document.getElementById("log-out-pop");
+  const nofipop = document.getElementById("notifi-popup");
+  const logProfile = document.querySelector(".log-in-popup");
+  const notification = document.querySelector(".noti-popup");
+  const toggleClass = "toggle-class";
+
+  logOutPop.addEventListener("click", function () {
+    logProfile.classList.toggle(toggleClass);
+    notification.classList.remove(toggleClass);
+  });
+
+  nofipop.addEventListener("click", function () {
+    notification.classList.toggle(toggleClass);
+    logProfile.classList.remove(toggleClass);
+  });
+  setTimeout(function () {
+    $(".err-msg").remove();
+  }, 5000);
+</script>

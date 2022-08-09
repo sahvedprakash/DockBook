@@ -1,0 +1,108 @@
+<main class="container">
+  <form
+    action="/patient/add-profile"
+    class="doc-profile-form p-form"
+    method="post"
+    enctype="multipart/form-data"
+  >
+    <div class="sec-div">
+      <div class="information">
+        <h2 class="p-title">User Profile</h2>
+        <div class="form-grp">
+          <label for="user-name">Your Full Name</label>
+          <input
+            type="text"
+            name="userName"
+            id="user-name"
+            placeholder="Enter your name"
+            required
+          />
+        </div>
+        <div class="form-grp">
+          <label for="user-Phonr">Your Phone No :</label>
+          <input
+            type="text"
+            onkeypress="validate(event)"
+            name="userPhone"
+            id="user-phone"
+            placeholder="Enter phone number"
+            required
+          />
+        </div>
+
+        <div class="form-grp doc-dob">
+          <label for="gander">Gander :</label>
+          <select name="gander" id="gander">
+            <option value="select">---- Select Gander ----</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Others">Others</option>
+          </select>
+        </div>
+        <div class="form-grp">
+          <label for="user-address">Enter Address</label>
+          <textarea
+            name="userAddress"
+            id="user-address"
+            cols="30"
+            rows="10"
+          ></textarea>
+        </div>
+        <div class="form-grp">
+          <label for="health-issue">Health Issues</label>
+          <textarea
+            name="healthIssu"
+            id="health-address"
+            cols="30"
+            rows="10"
+          ></textarea>
+        </div>
+        <div class="form-grp doc-ln">
+          <div id="previewPhoto"></div>
+          <div class="upload-Label">
+            <label for="docImg">Upload Photo</label>
+            <input
+              type="file"
+              name="userPhoto"
+              id="user-photo"
+              onchange="getPhoto(event)"
+            />
+          </div>
+        </div>
+        <div class="form-grp">
+          <label for="user-history">Medicale History</label>
+          <input type="file" name="user-history" id="user-history" />
+        </div>
+        <button class="btn next-btn" type="submit">Submit</button>
+      </div>
+    </div>
+  </form>
+</main>
+<script>
+  function validate(evt) {
+    var theEvent = evt || window.event;
+
+    // Handle paste
+    if (theEvent.type === "paste") {
+      key = event.clipboardData.getData("text/plain");
+    } else {
+      // Handle key press
+      var key = theEvent.keyCode || theEvent.which;
+      key = String.fromCharCode(key);
+    }
+    var regex = /[0-9]|\./;
+    if (!regex.test(key)) {
+      theEvent.returnValue = false;
+      if (theEvent.preventDefault) theEvent.preventDefault();
+    }
+  }
+
+  function getPhoto(event) {
+    let profileImg = URL.createObjectURL(event.target.files[0]);
+    let imgDiv = document.getElementById("previewPhoto");
+    let newImg = document.createElement("img");
+    imgDiv.innerHTML = "";
+    newImg.src = profileImg;
+    imgDiv.appendChild(newImg);
+  }
+</script>

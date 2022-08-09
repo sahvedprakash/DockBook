@@ -1,0 +1,447 @@
+<header class="step-header">
+  <div class="steps">
+    <h3 id="bar1" class="step-bar bar1">1</h3>
+    <p class="step-title">Personal Information</p>
+  </div>
+  <div class="steps">
+    <h3 id="bar2" class="step-bar bar2">2</h3>
+    <p class="step-title">Academic Information</p>
+  </div>
+  <div class="steps">
+    <h3 id="bar3" class="step-bar">3</h3>
+    <p class="step-title">Professional Information</p>
+  </div>
+</header>
+<main class="container">
+  <form
+    action="/doctor/add-doctor"
+    onkeypress="test()"
+    class="doc-profile-form"
+    method="post"
+    enctype="multipart/form-data"
+  >
+    <div class="sec-div">
+      <!-- Personal Information -->
+      <section class="information" id="personal">
+        <h1 class="profile-title">Personal Information</h1>
+        <div class="form-grp doc-name">
+          <label for="name">Your Full Name :</label>
+          <input
+            id="name-input"
+            type="text"
+            name="docName"
+            placeholder="Ex : Dr Ali Abdullah"
+            required
+          />
+        </div>
+        <div class="form-grp doc-phn">
+          <label for="name">Phone Number</label>
+          <input
+            type="text"
+            onkeypress="validate(event)"
+            name="docPhnNumber"
+            id="phn-num"
+            placeholder="Enter Phone number"
+            required
+          />
+        </div>
+        <div class="form-grp doc-dob">
+          <label for="dob">Your Birth Day</label>
+          <input
+            id="dob"
+            type="date"
+            name="docDOB"
+            placeholder="Enter Birthday"
+            required
+          />
+        </div>
+        <div class="form-grp doc-dob">
+          <label for="gander">Gander :</label>
+          <select name="gander" id="gander">
+            <option value="select">---- Select Gander ----</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Others">Others</option>
+          </select>
+        </div>
+        <div class="form-grp">
+          <label for="name">Address :</label>
+          <textarea
+            type="text"
+            name="docAddress"
+            placeholder="Enter Address"
+            required
+          ></textarea>
+        </div>
+        <div class="form-grp doc-fb">
+          <label for="name">Facebook Account</label>
+          <input
+            type="text"
+            name="facebook"
+            placeholder="Your facebook id's link"
+          />
+        </div>
+        <div class="form-grp doc-ln">
+          <label for="name">LinkedIn Account</label>
+          <input
+            type="text"
+            name="linkedIn"
+            placeholder="Your LinkedIn id's link"
+          />
+        </div>
+        <div class="form-grp doc-ln">
+          <div id="previewPhoto"></div>
+          <div class="upload-Label">
+            <label for="docImg">Upload Photo</label>
+            <input
+              type="file"
+              name="docPhoto"
+              id="docImg"
+              onchange="getPhoto(event)"
+            />
+          </div>
+        </div>
+
+        <button type="button" id="per-btn" class="btn next-btn">Next</button>
+      </section>
+      <!-- Academic Information -->
+      <section class="information" id="education">
+        <h1 class="profile-title">Academic Information</h1>
+        <div class="form-grp">
+          <label for="name">10th or Equevalent Examination :</label>
+          <div class="academic-year">
+            <input
+              type="text"
+              name="doc10year"
+              placeholder="Enter 10th passing year"
+              required
+            />
+            <input
+              type="text"
+              name="doc10school"
+              placeholder="Enter School Name"
+              required
+            />
+            <input
+              type="text"
+              name="doc10per"
+              placeholder="Your Parcentage"
+              required
+            />
+          </div>
+        </div>
+        <div class="form-grp">
+          <label for="name">12th or Equevalent Examination :</label>
+          <div class="academic-year">
+            <input
+              type="text"
+              name="doc12year"
+              placeholder="Enter 12th passing year"
+              required
+            />
+            <input
+              type="text"
+              name="doc12school"
+              placeholder="Enter School Name"
+              required
+            />
+            <input
+              type="text"
+              name="doc12per"
+              placeholder="Your Parcentage"
+              required
+            />
+          </div>
+        </div>
+        <div class="form-grp">
+          <label for="name">MBBS or Equevalent Examination :</label>
+          <div class="academic-year">
+            <input
+              type="text"
+              name="docMBBSyear"
+              placeholder="Enter MBBS passing year"
+              required
+            />
+            <input
+              type="text"
+              name="docMBBSschool"
+              placeholder="Enter College Name"
+              required
+            />
+            <input
+              type="text"
+              name="docMBBSper"
+              placeholder="Your Parcentage"
+              required
+            />
+          </div>
+        </div>
+        <div class="form-grp">
+          <label for="name">Other Degree (if any) :</label>
+          <div class="academic-year">
+            <input
+              type="text"
+              name="docEXyear"
+              placeholder="Enter passing year"
+            />
+            <input
+              type="text"
+              name="docEXschool"
+              placeholder="Enter College Name"
+            />
+            <input type="text" name="docEXper" placeholder="Your Parcentage" />
+          </div>
+        </div>
+        <div class="form-grp">
+          <label for="name">Extra Qualification</label>
+          <textarea
+            type="text"
+            name="extraQuality"
+            placeholder="Write other Qualification if you have"
+          ></textarea>
+        </div>
+        <div class="btn-div">
+          <button type="button" id="pre-btn" class="btn next-btn">
+            Previous
+          </button>
+          <button type="button" id="edu-btn" class="btn next-btn">Next</button>
+        </div>
+      </section>
+      <!-- Preofessional Information -->
+      <section class="information" id="professional">
+        <h1 class="profile-title">Professional Information</h1>
+        <div class="form-grp doc-name">
+          <label for="name">Current Position</label>
+          <div class="professional-position">
+            <input
+              type="text"
+              name="docPosition"
+              placeholder="Your Current Position"
+              required
+            />
+            <input
+              type="text"
+              name="docworkPlace"
+              placeholder="Your Work place"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="form-grp">
+          <label for="name">Employment History</label>
+          <textarea
+            type="text"
+            name="docHisotry"
+            placeholder="Your Employment History"
+            required
+          ></textarea>
+        </div>
+        <div class="form-grp doc-name">
+          <label for="name">Exprience</label>
+          <div class="professional-position">
+            <input type="text" name="docExp" placeholder="Your Exprience" />
+            <input type="text" name="docTitle" placeholder="Your Title" />
+          </div>
+        </div>
+        <div class="form-grp">
+          <div class="content">
+            <div class="tags-info">
+              <label>Add Your Specialties</label>
+            </div>
+
+            <ul id="tag-ul">
+              <input
+                type="text"
+                id="tag-input"
+                spellcheck="false"
+                placeholder="Press Enter to seperate the tags"
+              />
+            </ul>
+          </div>
+          <input
+            type="hidden"
+            id="tag-input-hide"
+            name="speciality"
+            spellcheck="false"
+            placeholder="Press Enter to seperate the tags"
+          />
+          <div class="tag-details">
+            <label><span id="rem-count">4</span> tags are remaining</label>
+            <button type="button" class="btn tag-btn">Remove All</button>
+          </div>
+        </div>
+
+        <div class="btn-div">
+          <button
+            type="button"
+            id="por-btn"
+            onclick="hideShow()"
+            class="btn next-btn"
+          >
+            Previous
+          </button>
+          <button type="submit" onclick="tagOut()" class="btn next-btn">
+            Submit
+          </button>
+        </div>
+      </section>
+    </div>
+  </form>
+</main>
+
+<script>
+  let eduBtn = document.getElementById("edu-btn");
+  let preBtn = document.getElementById("pre-btn");
+  let perBtn = document.getElementById("per-btn");
+  let personal = document.getElementById("personal");
+  let education = document.getElementById("education");
+  let professional = document.getElementById("professional");
+  let phnNum = document.getElementById("phn-num");
+  let dob = document.getElementById("dob");
+  let name = document.getElementById("name-input");
+
+  perBtn.addEventListener("click", function () {
+    personal.style.left = "-700px";
+    education.style.left = "0px";
+    document.getElementById("bar2").style.backgroundColor = "#3399ff";
+  });
+  preBtn.addEventListener("click", function () {
+    personal.style.left = "0px";
+    education.style.left = "700px";
+    document.getElementById("bar2").style.backgroundColor = "#b8e0fb";
+    document.getElementById("bar3").style.backgroundColor = "#b8e0fb";
+  });
+  eduBtn.addEventListener("click", function () {
+    personal.style.left = "-1400px";
+    education.style.left = "-700px";
+    professional.style.left = "0px";
+    document.getElementById("bar2").style.backgroundColor = "#3399ff";
+    document.getElementById("bar3").style.backgroundColor = "#3399ff";
+  });
+
+  function hideShow() {
+    personal.style.left = "-700px";
+    education.style.left = "0px";
+    professional.style.left = "1400px";
+    document.getElementById("bar2").style.backgroundColor = "#3399ff";
+    document.getElementById("bar3").style.backgroundColor = "#b8e0fb";
+  }
+
+  // Tag function
+  const ul = document.querySelector("#tag-ul");
+  const input = document.querySelector("#tag-input");
+  const tagNumb = document.querySelector("#rem-count");
+  let hideTag = document.getElementById("tag-input-hide");
+
+  let maxTags = 4;
+  let tags = [];
+
+  countTags();
+  createTag();
+  function countTags() {
+    // input.focus();
+    tagNumb.innerText = maxTags - tags.length;
+  }
+  function createTag() {
+    ul.querySelectorAll("li").forEach((li) => li.remove());
+    tags
+      .slice()
+      .reverse()
+      .forEach((tag) => {
+        let liTag = `<li>${tag} <i class="uit uit-multiply" onclick="remove(this, '${tag}')"></i></li>`;
+        ul.insertAdjacentHTML("afterbegin", liTag);
+      });
+    countTags();
+  }
+  function remove(element, tag) {
+    let index = tags.indexOf(tag);
+    tags = [...tags.slice(0, index), ...tags.slice(index + 1)];
+    // console.log(tags);
+    element.parentElement.remove();
+    if (tags.length < maxTags || tags.length === 0) {
+      input.style.display = "block";
+    }
+    let sliceTags = tags.slice().join(",");
+    hideTag.value = sliceTags;
+    // console.log(tags.length);
+    countTags();
+  }
+
+  function getPhoto(event) {
+    let profileImg = URL.createObjectURL(event.target.files[0]);
+    let imgDiv = document.getElementById("previewPhoto");
+    let newImg = document.createElement("img");
+    imgDiv.innerHTML = "";
+    newImg.src = profileImg;
+    imgDiv.appendChild(newImg);
+  }
+
+  function validate(evt) {
+    var theEvent = evt || window.event;
+
+    // Handle paste
+    if (theEvent.type === "paste") {
+      key = event.clipboardData.getData("text/plain");
+    } else {
+      // Handle key press
+      var key = theEvent.keyCode || theEvent.which;
+      key = String.fromCharCode(key);
+    }
+    var regex = /[0-9]|\./;
+    if (!regex.test(key)) {
+      theEvent.returnValue = false;
+      if (theEvent.preventDefault) theEvent.preventDefault();
+    }
+  }
+
+  function addTag(e) {
+    if (e.key == "Enter") {
+      let tag = e.target.value.replace(/\s+/g, " ");
+      // console.log(tag);
+      if (tag.length > 1 && !tags.includes(tag)) {
+        if (tags.length < maxTags) {
+          tag.split(",").forEach((tag) => {
+            tags.push(tag);
+            createTag();
+            if (tags.length === maxTags) {
+              input.style.display = "none";
+            }
+          });
+        }
+      }
+      e.target.value = "";
+      // console.log(input.value);
+      sliceTags = tags.slice().join(",");
+      hideTag.value = sliceTags;
+    }
+  }
+
+  input.addEventListener("keyup", addTag);
+  const removeBtn = document.querySelector(".tag-details button");
+  removeBtn.addEventListener("click", () => {
+    tags.length = 0;
+    ul.querySelectorAll("li").forEach((li) => li.remove());
+    countTags();
+    input.style.display = "block";
+    sliceTags = tags.slice().join(",");
+    hideTag.value = sliceTags;
+  });
+
+  function test() {
+    if (window.event.keyCode == 13) {
+      window.event.cancelBubble = true;
+      window.event.returnValue = false;
+    }
+  }
+
+  function tagOut() {
+    let allTags = tags.slice().join(",");
+    let hideval = hideTag.value;
+    if (tags.length === 0 || allTags !== hideval) {
+      alert("Please speciltise at least one");
+    } else {
+      console.log(hideval);
+    }
+  }
+</script>

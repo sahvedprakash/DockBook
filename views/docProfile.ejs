@@ -1,0 +1,173 @@
+<main class="container doc-main-profile">
+  <section class="doc-main-left">
+    <div class="doc-photo">
+      <img src="../img/<%=getDoctor.profileImg%>" alt="" />
+    </div>
+    <div class="doc-gen-info">
+      <h3><%= getDoctor.name%></h3>
+      <div class="doc-gen-div">
+        <h5><%= getDoctor.tobTitle%></h5>
+        <h5><%= getDoctor.workdPlace%></h5>
+      </div>
+    </div>
+    <div class="profileW-list">
+      <a href="#" onclick="showProfile()"
+        ><i class="fas fa-user-md icn"></i>My Profile</a
+      >
+      <a href="#" onclick="showChamberList()"
+        ><i class="fas fa-clinic-medical icn"></i>Chambers List</a
+      >
+      <a href="#" onclick="showPatienList()"
+        ><i class="fas fa-users icn"></i>Patients List</a
+      >
+      <a href="#"><i class="far fa-chart-bar icn"></i>Chart</a>
+      <a href="/doctor/add-chamber"
+        ><i class="fas fa-clinic-medical icn"></i> Add chamber</a
+      >
+      <a href="/log-out"><i class="fas fa-sign-out-alt icn"></i> Log out</a>
+    </div>
+  </section>
+  <section class="sec-com" id="profile">
+    <div>
+      <h3 class="info-title">Personal Information</h3>
+      <div class="doc-info-grp doc-per-info">
+        <div class="user-info-list">
+          <h3>User Full Name</h3>
+          <p class="info-text"><%= getDoctor.name%></p>
+          <h3>Job title</h3>
+          <p class="info-text"><%= getDoctor.tobTitle%></p>
+          <h3>Gander</h3>
+          <p class="info-text"><%= getDoctor.gander%></p>
+        </div>
+        <div class="user-info-list">
+          <h3>Email Address</h3>
+          <p class="info-text"><%= getDoctor.userDel.email%></p>
+          <h3>Phone Number</h3>
+          <p class="info-text"><%= getDoctor.phoneNum%></p>
+          <h3>Parmanent Address</h3>
+          <p class="info-text"><%= getDoctor.address%></p>
+        </div>
+      </div>
+      <h3 class="info-title">Educational Information</h3>
+      <div class="doc-edu-info doc-info-grp">
+        <h2 class="info-text-odd">School Name</h2>
+        <h2 class="info-text-evn"><%= getDoctor.schoolInfo[1]%></h2>
+        <h2 class="info-text-odd">College Name</h2>
+        <h2 class="info-text-evn"><%= getDoctor.collegeInfo[1]%></h2>
+        <h2 class="info-text-odd">Medical Institution</h2>
+        <h2 class="info-text-evn"><%= getDoctor.mbbsInfo[1]%></h2>
+        <h2 class="info-text-odd">Extra Qualification</h2>
+        <h2 class="info-text-evn"><%= getDoctor.extraQuility%></h2>
+      </div>
+      <h3 class="info-title">Professional Information</h3>
+      <div class="doc-pro-info doc-info-grp">
+        <h2 class="info-text-odd">Current work Place</h2>
+        <h2 class="info-text-evn"><%= getDoctor.workdPlace%></h2>
+        <h2 class="info-text-odd">Experience</h2>
+        <h2 class="info-text-evn"><%= getDoctor.currentPosition%></h2>
+        <h2 class="info-text-odd">Experience</h2>
+        <h2 class="info-text-evn"><%= getDoctor.exprience%></h2>
+        <h2 class="info-text-odd">Speciality</h2>
+        <h2 class="info-text-evn">
+          <% getDoctor.specialties.forEach((spl,i)=> {%>
+          <span><%= spl%></span>
+          <% }) %>
+        </h2>
+      </div>
+    </div>
+  </section>
+  <section class="sec-com" id="chamber-list">
+    <h2 class="top-title">Chamber List</h2>
+    <div class="wrap-table100">
+      <div class="table100">
+        <table>
+          <thead>
+            <tr class="table100-head">
+              <th class="column1">Serial No</th>
+              <th class="column2">Chamber Name</th>
+              <th class="column3">Contact No</th>
+              <th class="column4">Address</th>
+              <th class="column5">Limit</th>
+              <th class="column6">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% doctorCham.forEach((chamber,i)=> {%>
+            <tr>
+              <td class="column1"><%= i+1%></td>
+              <td class="column2"><%= chamber.chamberName%></td>
+              <td class="column3"><%= chamber.contactNumber%></td>
+              <td class="column4"><%= chamber.address%></td>
+              <td class="column5"><%= chamber.dailyLimit%></td>
+              <td class="column6">
+                <i class="far fa-trash-alt"></i> <i class="far fa-edit"></i>
+              </td>
+            </tr>
+            <%})%>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+  <section class="sec-com" id="patient-list">
+    <h2 class="top-title">Patients List</h2>
+    <div class="wrap-table100">
+      <div class="table100">
+        <table>
+          <thead>
+            <tr class="table100-head">
+              <th class="column1">Serial No</th>
+              <th class="column2">Patient Name</th>
+              <th class="column3">Contact No</th>
+              <th class="column4">Health Issu</th>
+              <th class="column5">Chamber</th>
+              <th class="column6 col6-x">Date</th>
+              <th class="column6 col6-x">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% appointmentsData.forEach((appData,i)=> {%>
+            <tr>
+              <td class="column1"><%= i+1 %></td>
+              <td class="column2"><%= appData.patientName%></td>
+              <td class="column3 num-font"><%= appData.contactNo%></td>
+              <td class="column4"><%= appData.healthIssu%></td>
+              <td class="column5"><%= appData.chamberData.chamberName%></td>
+              <td class="column6 num-font col6-x">
+                <%= appData.date.toLocaleDateString()%>
+              </td>
+              <td class="column6 col6-x">
+                <a href="/cancel/<%= appData.id%>"
+                  ><i class="far fa-trash-alt"></i
+                ></a>
+              </td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+  const chamberList = document.getElementById("chamber-list");
+  const patientList = document.getElementById("patient-list");
+  const profile = document.getElementById("profile");
+
+  function showChamberList() {
+    chamberList.style.display = "block";
+    patientList.style.display = "none";
+    profile.style.display = "none";
+  }
+  function showPatienList() {
+    chamberList.style.display = "none";
+    patientList.style.display = "block";
+    profile.style.display = "none";
+  }
+  function showProfile() {
+    chamberList.style.display = "none";
+    patientList.style.display = "none";
+    profile.style.display = "block";
+  }
+</script>

@@ -1,0 +1,89 @@
+<main class="container doc-main-profile">
+  <section class="doc-main-left">
+    <div class="user-pro-photo">
+      <img src="../img/<%= userInfo.userPhoto%> " alt="" />
+    </div>
+    <div class="profileW-list user-top">
+      <a href="#" onclick="showProfile()"
+        ><i class="fas fa-user-md icn"></i>My Profile</a
+      >
+      <a href="#" onclick="showAppointmentList()"
+        ><i class="fas fa-clinic-medical icn"></i>Appointment List</a
+      >
+      <a href="/log-out"><i class="fas fa-sign-out-alt icn"></i> Log out</a>
+    </div>
+  </section>
+  <section id="profile">
+    <div class="user-profile-info">
+      <div class="my-profile-title">
+        <h2>My Profile</h2>
+      </div>
+      <div class="my-profile-info">
+        <div class="my-profile-img">
+          <img src="../img/<%= userInfo.userPhoto%> " alt="" />
+        </div>
+        <div class="user-info-list">
+          <h3>User Full Name</h3>
+          <p><%= userInfo.name%></p>
+          <h3>Email Address</h3>
+          <p><%= userInfo.userDel.email%></p>
+          <h3>Gander</h3>
+          <p><%= userInfo.gender%></p>
+          <h3>Phone Number</h3>
+          <p><%= userInfo.phoneNum%></p>
+          <h3>Parmanent Address</h3>
+          <p><%= userInfo.address%></p>
+          <h3>Health Issues</h3>
+          <p><%= userInfo.healthIssu%></p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="chamber-list" class="user-profile-info">
+    <h2 class="top-title">Appointment List</h2>
+    <div class="wrap-table100">
+      <div class="table100">
+        <table>
+          <thead>
+            <tr class="table100-head">
+              <th class="column1">Serial No</th>
+              <th class="column2">Doctor Name</th>
+              <th class="column3">Chamber Name</th>
+              <th class="column4">Date</th>
+
+              <th class="column6">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% appointments.forEach((appInfo,i)=> {%>
+            <tr>
+              <td class="column1"><%= i+1 %></td>
+              <td class="column2"><%= appInfo.doctorData.name %></td>
+              <td class="column4"><%= appInfo.chamberData.chamberName %></td>
+              <td class="column5"><%= appInfo.date.toLocaleDateString()%></td>
+              <td class="column6">
+                <a href="/cancel/<%= appInfo.id%>"
+                  ><i class="far fa-trash-alt"></i
+                ></a>
+              </td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</main>
+<script>
+  const chamberList = document.getElementById("chamber-list");
+  const profile = document.getElementById("profile");
+
+  function showAppointmentList() {
+    chamberList.style.display = "block";
+    profile.style.display = "none";
+  }
+  function showProfile() {
+    chamberList.style.display = "none";
+    profile.style.display = "block";
+  }
+</script>

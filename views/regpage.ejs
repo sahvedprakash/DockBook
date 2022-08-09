@@ -1,0 +1,66 @@
+<main class="container">
+  <section class="reg-box">
+    <div class="log-in-title">
+      <h1>Register</h1>
+      <i class="fas fa-user"></i>
+    </div>
+
+    <form action="/user/registration" class="log-in-form" method="post">
+      <div class="user-id">
+        <label for="user-reg-email">Email :</label>
+        <input
+          type="email"
+          name="email"
+          id="user-reg-email"
+          placeholder="Enter Email"
+        />
+      </div>
+      <div class="user-pass">
+        <label for="user-reg-pass">Password :</label>
+        <input
+          type="password"
+          name="password"
+          id="user-reg-pass"
+          placeholder="Enter Password"
+        />
+      </div>
+      <div class="user-pass">
+        <label for="user-conf-pass">Confirm Password :</label>
+        <input
+          type="password"
+          name="cPassword"
+          id="user-conf-pass"
+          placeholder="Re-Enter Password"
+        />
+      </div>
+
+      <div class="role">
+        <h3>Your are a:</h3>
+        <div class="user-iden">
+          <div class="g-user">
+            <input type="radio" value="g-user" name="role" id="user-gen" />
+            <label for="user-gen">General User</label>
+          </div>
+          <div class="doctor">
+            <input type="radio" value="doctor" name="role" id="user-doc" />
+            <label for="user-doc">Doctor</label>
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" disabled id="submit-btn" class="btn log-btn">
+        Register
+      </button>
+    </form>
+  </section>
+</main>
+<script>
+  let pass = document.getElementById("user-reg-pass");
+  let confPass = document.getElementById("user-conf-pass");
+  let submitBtn = document.getElementById("submit-btn");
+
+  pass.addEventListener("keyup", function () {
+    if (pass.value.trim() === "" || pass.value.length < 6)
+      submitBtn.disabled = false;
+  });
+</script>

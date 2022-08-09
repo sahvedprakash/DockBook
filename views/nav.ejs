@@ -1,0 +1,28 @@
+<nav class="container nav-container">
+  <section class="search" id="search">
+    <div class="profile-img">
+      <img src="" alt="" />
+    </div>
+    <input
+      type="text"
+      id="search-input"
+      class="serach-input"
+      placeholder="Search"
+    />
+    <i class="fas fa-search search-icon icon"></i>
+  </section>
+  <section class="nav-item">
+    <i id="notifi-popup" class="far fa-bell not-icon icon"></i>
+    <div id="log-out-pop" class="profile-img">
+      <img src="" alt="" />
+    </div>
+  </section>
+
+  <div class="log-in-popup">
+    <a href="#"><%=pat?.name%></a>
+    <a href="/patient/my-profile">Profile</a>
+    <a href="/log-out">Log out</a>
+  </div>
+
+  <div class="noti-popup"></div>
+</nav>

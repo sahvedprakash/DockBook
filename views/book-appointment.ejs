@@ -1,0 +1,10 @@
+<form action='/<%=pat.slug%>/book-appointment' method="POST">
+    <label for="patientId">Patient Id</label> 
+    <input type="text" placeholder="Enter Id" name="pid"  required>
+
+    <label for="date">Date of Appoinment</label>
+    <input type="date" name="date" id="date" required>
+    <button type="submit">Book</button>
+</form>
+
+<h3><%= errMsg%></h3>

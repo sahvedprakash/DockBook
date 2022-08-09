@@ -1,0 +1,16 @@
+<Style>
+    input,button{
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    </Style>
+    
+    <form action="/<%=slug%>/add-chamber" method="post">
+        <label for="name"> Name</label>
+        <input type="text" name="name" placeholder="Chamber Name" required> <br>
+        <label for="address">Address</label>
+        <input type="address" name="address" placeholder="Enter Address" required> <br>
+        <label for="limit">Chamber Limit</label>
+        <input type="number" name="limit" id="limit"> <br>
+        <button type="submit">Submit Details</button>
+    </form>

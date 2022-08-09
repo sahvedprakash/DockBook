@@ -1,0 +1,178 @@
+<main class="container">
+  <form action="/doctor/add-chamber" class="doc-profile-form" method="post">
+    <div class="sec-div information">
+      <h2 class="p-title">Chamber Information</h2>
+      <div class="form-grp">
+        <label for="chamber-name">Chamber Name </label>
+        <input
+          type="text"
+          name="chamberName"
+          id="chamber-name"
+          placeholder="Enter your name"
+          required
+        />
+      </div>
+      <div class="form-grp">
+        <label for="chamber-Phonr">Conact No :</label>
+        <input
+          type="text"
+          onkeypress="validate(event)"
+          name="chamberPhone"
+          id="chamber-phone"
+          placeholder="Enter phone number"
+          required
+        />
+      </div>
+      <div class="form-grp">
+        <label for="chamber-address">Chamber Address</label>
+        <textarea
+          name="chamberAddress"
+          id="chamber-address"
+          cols="30"
+          rows="10"
+        ></textarea>
+      </div>
+      <div class="form-grp">
+        <label for="chamber-name">Daily Limit</label>
+        <input
+          type="text"
+          name="chamberLimit"
+          onkeypress="validate(event)"
+          id="chamber-limit"
+          placeholder="Daily Limit"
+          required
+        />
+      </div>
+      <div>
+        <h3 class="p-title">Add Visting Hour</h3>
+        <div>
+          <div class="timingAdd">
+            <label for="">Monday</label>
+            <input type="time" name="monstr" />
+
+            <span class="to-span">TO</span>
+            <input type="time" name="monend" />
+
+            <input
+              type="checkbox"
+              name="monoffDay"
+              value="off-day"
+              id="off-day"
+            />
+            <label for="off-day">Off Day</label>
+          </div>
+          <div class="timingAdd">
+            <label for="">Tuesday</label>
+            <input type="time" name="tuestr" />
+
+            <span class="to-span">TO</span>
+            <input type="time" name="tueend" />
+
+            <input
+              type="checkbox"
+              name="tueoffDay"
+              value="off-day"
+              id="off-day"
+            />
+            <label for="off-day">Off Day</label>
+          </div>
+          <div class="timingAdd">
+            <label for="">Wednesday</label>
+            <input type="time" name="wedstr" />
+
+            <span class="to-span">TO</span>
+            <input type="time" name="wedend" />
+
+            <input
+              type="checkbox"
+              name="wedoffDay"
+              value="off-day"
+              id="off-day"
+            />
+            <label for="off-day">Off Day</label>
+          </div>
+          <div class="timingAdd">
+            <label for="">Thursday</label>
+            <input type="time" name="thustr" />
+
+            <span class="to-span">TO</span>
+            <input type="time" name="thuend" />
+
+            <input
+              type="checkbox"
+              name="thuoffDay"
+              value="off-day"
+              id="off-day"
+            />
+            <label for="off-day">Off Day</label>
+          </div>
+          <div class="timingAdd">
+            <label for="">Friday</label>
+            <input type="time" name="fristr" />
+
+            <span class="to-span">TO</span>
+            <input type="time" name="friend" />
+
+            <input
+              type="checkbox"
+              name="frioffDay"
+              value="off-day"
+              id="off-day"
+            />
+            <label for="off-day">Off Day</label>
+          </div>
+          <div class="timingAdd">
+            <label for="">Saturday</label>
+            <input type="time" name="satstr" />
+
+            <span class="to-span">TO</span>
+            <input type="time" name="satend" />
+
+            <input
+              type="checkbox"
+              name="satoffDay"
+              value="off-day"
+              id="off-day"
+            />
+            <label for="off-day">Off Day</label>
+          </div>
+          <div class="timingAdd">
+            <label for="">Sunday</label>
+            <input type="time" name="sunstr" />
+
+            <span class="to-span">TO</span>
+            <input type="time" name="sunend" />
+
+            <input
+              type="checkbox"
+              name="sunoffDay"
+              value="off-day"
+              id="off-day"
+            />
+            <label for="off-day">Off Day</label>
+          </div>
+        </div>
+      </div>
+      <button class="btn next-btn" type="submit">Submit</button>
+    </div>
+  </form>
+</main>
+<script>
+  function validate(evt) {
+    var theEvent = evt || window.event;
+
+    // Handle paste
+    if (theEvent.type === "paste") {
+      key = event.clipboardData.getData("text/plain");
+    } else {
+      // Handle key press
+      var key = theEvent.keyCode || theEvent.which;
+      key = String.fromCharCode(key);
+    }
+    var regex = /[0-9]|\./;
+    if (!regex.test(key)) {
+      theEvent.returnValue = false;
+      if (theEvent.preventDefault) theEvent.preventDefault();
+    }
+  }
+</script>
